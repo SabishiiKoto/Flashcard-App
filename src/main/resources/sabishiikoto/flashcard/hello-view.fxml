@@ -83,7 +83,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <TextArea fx:id="textAreaForDefinition" layoutX="11.0" layoutY="220.0" onDragDetected="#textAreaForDefinitionTrigger" prefHeight="134.0" prefWidth="178.0" promptText="Stands for Object-Oriented Programming, a programming paradigm that revolves around the concept of objects." wrapText="true" />
+            <TextArea fx:id="textAreaForDefinition" layoutX="11.0" layoutY="220.0" prefHeight="134.0" prefWidth="178.0" promptText="Stands for Object-Oriented Programming, a programming paradigm that revolves around the concept of objects." wrapText="true" />
             <ComboBox fx:id="comboBoxCategory" editable="true" layoutX="12.0" layoutY="82.0" onAction="#comboBoxCategoryTrigger" prefHeight="26.0" prefWidth="174.0" promptText="Computer Science" />
             <Label layoutX="11.0" layoutY="52.0" text="Category" textFill="#d99c9c">
                <font>
@@ -100,7 +100,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <ComboBox fx:id="comboBoxForTerm" editable="true" layoutX="12.0" layoutY="149.0" onAction="#comboBoxForTermTrigger" prefHeight="26.0" prefWidth="176.0" promptText="OOP" />
+            <ComboBox fx:id="comboBoxForTerm" editable="true" layoutX="12.0" layoutY="149.0" prefHeight="26.0" prefWidth="176.0" promptText="OOP" />
             <Button layoutX="134.0" layoutY="372.0" mnemonicParsing="false" onAction="#testTrigger" prefHeight="30.0" prefWidth="54.0" text="Test" textFill="#cf7f7f">
                <font>
                   <Font name="System Bold" size="14.0" />

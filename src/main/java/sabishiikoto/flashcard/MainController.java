@@ -5,7 +5,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class MainController {
@@ -38,13 +41,17 @@ public class MainController {
     void aboutTrigger(ActionEvent event) {
         labelForError.setText("");
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("About This Flash Card!");
+        alert.setTitle("About This Flashcard Program!");
         alert.setHeaderText("Contact and Information");
-        alert.setContentText("This is a personal project!");
+        alert.setContentText("This is a personal project coded in java language!\nCheck out my GitHub: https://github.com/SabishiiKoto");
+        alert.showAndWait();
     }
 
     @FXML
     void addTrigger(ActionEvent event){
+        currentCategory = null;
+        labelForNumberOfWord.setText("");
+        buttonForFlashCard.setText("");
         String categoryName = comboBoxCategory.getValue();
         if (categoryName != null && !categoryName.isEmpty()){
             String termName = comboBoxForTerm.getValue();
@@ -54,18 +61,24 @@ public class MainController {
                 if (termName != null && !termName.isEmpty() && !textAreaForDefinition.getText().trim().isEmpty()){
                     Term term = new Term(termName,textAreaForDefinition.getText());
                     if (category.contains(termName)){
-                        category.replace(term);
-                        labelForError.setTextFill(Color.STEELBLUE);
-                        labelForError.setText("Term is updated!");
+                        boolean status = category.replace(term);
+                        if (status) {
+                            labelForError.setTextFill(Color.STEELBLUE);
+                            labelForError.setText("Term is updated!");
+                        }
+                        else{
+                            labelForError.setTextFill(Color.RED);
+                            labelForError.setText("Term update is failed!");
+                        }
                     }
                     else{
                         category.addTerm(term);
-                        textAreaForDefinition.clear();
-                        comboBoxForTerm.getItems().add(termName);
-                        comboBoxForTerm.setValue(null);
                         labelForError.setTextFill(Color.STEELBLUE);
                         labelForError.setText("A new term is added!");
+                        comboBoxForTerm.getItems().add(termName);
                     }
+                    textAreaForDefinition.clear();
+                    comboBoxForTerm.setValue(null);
                 }
                 else{
                     labelForError.setTextFill(Color.RED);
@@ -109,10 +122,14 @@ public class MainController {
         comboBoxCategory.getItems().add("General");
         comboBoxForTerm.setValue(null);
         textAreaForDefinition.clear();
+        currentCategory = null;
+        labelForNumberOfWord.setText("");
+        buttonForFlashCard.setText("");
     }
 
     @FXML
     void comboBoxCategoryTrigger(ActionEvent event) {
+        labelForError.setText("");
         String categoryName = comboBoxCategory.getValue();
         comboBoxForTerm.getItems().clear();
         if (categoryName != null){
@@ -128,12 +145,10 @@ public class MainController {
     }
 
     @FXML
-    void comboBoxForTermTrigger(ActionEvent event) {
-
-    }
-
-    @FXML
     void deleteTrigger(ActionEvent event) {
+        currentCategory = null;
+        labelForNumberOfWord.setText("");
+        buttonForFlashCard.setText("");
         String categoryName = comboBoxCategory.getValue();
         if (categoryName != null && !categoryName.isEmpty()){
             int index = categoryListForComboBox.indexOf(categoryName);
@@ -177,17 +192,26 @@ public class MainController {
                 isTermName = true;
             }
         }
+        else{
+            labelForError.setTextFill(Color.RED);
+            labelForError.setText("Please select a valid category!");
+        }
     }
 
     @FXML
     void loadTrigger(ActionEvent event) {
         labelForError.setText("");
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Pick a file to load data!");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text File", "*.txt"));
+        fileChooser.setInitialDirectory(new File("."));
+        File file = fileChooser.showOpenDialog(new Stage());
+
 
     }
 
     @FXML
     void nextWordTrigger(ActionEvent event) {
-        labelForError.setText("");
         if (currentCategory != null){
             int temp = currentIndex + 1;
             if (temp < currentCategory.getTerms().size()) {
@@ -200,15 +224,13 @@ public class MainController {
         }
         else{
             labelForError.setTextFill(Color.RED);
-            labelForError.setText("Please select a category!");
+            labelForError.setText("Please select a valid category!");
         }
 
     }
 
     @FXML
     void previousWordTrigger(ActionEvent event) {
-        labelForError.setText("");
-        labelForError.setText("");
         if (currentCategory != null){
             int temp = currentIndex - 1;
             if (temp >= 0) {
@@ -221,13 +243,22 @@ public class MainController {
         }
         else{
             labelForError.setTextFill(Color.RED);
-            labelForError.setText("Please select a category!");
+            labelForError.setText("Please select a valid category!");
         }
     }
 
     @FXML
     void saveTrigger(ActionEvent event) {
         labelForError.setText("");
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Pick a file to save to...");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text File", "*.txt"));
+        fileChooser.setInitialDirectory(new File("."));
+        fileChooser.setInitialFileName("flashCardJava.txt");
+        File file = fileChooser.showSaveDialog(new Stage());
+        String status = Data.saveFile(file);
+
+
 
     }
     @FXML
@@ -272,11 +303,6 @@ public class MainController {
         }
     }
 
-    @FXML
-    void textAreaForDefinitionTrigger(MouseEvent event) {
-        labelForError.setText("");
-
-    }
     @FXML
     public void initialize (){
         comboBoxCategory.getItems().add("General");
