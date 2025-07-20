@@ -52,14 +52,16 @@ public class Category {
      * Loop through the term list, and replace the term in the list.
      * @param term -> Term, a new term to replace the old one.
      */
-    public void replace(Term term){
+    public boolean replace(Term term){
         for (Term item: this.terms){
             if (item.getName().equals(term.getName())){
                 int index = terms.indexOf(item);
                 terms.add(index, term);
                 terms.remove(index + 1);
+                return true;
             }
         }
+        return false;
     }
     public int indexOf (String termName){
         for (int i = 0; i < this.terms.size(); i++){
