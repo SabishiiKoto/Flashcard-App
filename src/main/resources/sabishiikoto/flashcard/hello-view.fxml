@@ -15,12 +15,12 @@
    <center>
       <AnchorPane prefHeight="466.0" prefWidth="523.0" BorderPane.alignment="CENTER">
          <children>
-            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="296.0" layoutY="364.0" mnemonicParsing="false" onAction="#nextWordTrigger" text="&gt;" textAlignment="CENTER" textFill="#cf7f7f">
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="296.0" layoutY="372.0" mnemonicParsing="false" onAction="#nextWordTrigger" text="&gt;" textAlignment="CENTER" textFill="#cf7f7f">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="197.0" layoutY="364.0" mnemonicParsing="false" onAction="#previousWordTrigger" text="&lt;" textAlignment="CENTER" textFill="#cf7f7f">
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="197.0" layoutY="371.0" mnemonicParsing="false" onAction="#previousWordTrigger" text="&lt;" textAlignment="CENTER" textFill="#cf7f7f">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -30,12 +30,12 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="labelForNumberOfWord" alignment="CENTER" layoutX="228.0" layoutY="369.0" prefHeight="20.0" prefWidth="67.0" textFill="#cf7f7f" wrapText="true">
+            <Label fx:id="labelForNumberOfWord" alignment="CENTER" layoutX="228.0" layoutY="376.0" prefHeight="20.0" prefWidth="67.0" textFill="#cf7f7f" wrapText="true">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Button fx:id="buttonForFlashCard" alignment="CENTER" layoutX="17.0" layoutY="50.0" mnemonicParsing="false" onAction="#flashCardTrigger" prefHeight="299.0" prefWidth="486.0" textFill="#464242" wrapText="true">
+            <Button fx:id="buttonForFlashCard" alignment="CENTER" layoutX="17.0" layoutY="50.0" mnemonicParsing="false" onAction="#flashCardTrigger" prefHeight="304.0" prefWidth="486.0" textFill="#464242" wrapText="true">
                <font>
                   <Font size="18.0" />
                </font>
