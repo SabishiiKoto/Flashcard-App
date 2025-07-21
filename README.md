@@ -30,4 +30,3 @@ A GUI flash card.
 
 ## License
 - This project is for learning purposes only.
- 
