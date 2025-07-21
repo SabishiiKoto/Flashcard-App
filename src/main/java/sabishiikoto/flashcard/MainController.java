@@ -120,6 +120,7 @@ public class MainController {
         categories.add(category);
         comboBoxCategory.getItems().clear();
         comboBoxCategory.getItems().add("General");
+        comboBoxForTerm.getItems().clear();
         comboBoxForTerm.setValue(null);
         textAreaForDefinition.clear();
         currentCategory = null;
@@ -132,6 +133,7 @@ public class MainController {
         labelForError.setText("");
         String categoryName = comboBoxCategory.getValue();
         comboBoxForTerm.getItems().clear();
+        comboBoxForTerm.setValue(null);
         if (categoryName != null){
             if (categoryListForComboBox.contains(categoryName)) {
                 int index = categoryListForComboBox.indexOf(categoryName);
@@ -206,6 +208,35 @@ public class MainController {
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text File", "*.txt"));
         fileChooser.setInitialDirectory(new File("."));
         File file = fileChooser.showOpenDialog(new Stage());
+        if (file != null){
+            ArrayList<Category> temp = Data.loadFile(file);
+            if (temp != null){
+                categories = temp;
+                categoryListForComboBox.clear();
+                for (Category category : categories){
+                    categoryListForComboBox.add(category.getName());
+                }
+                comboBoxCategory.getItems().clear();
+                comboBoxCategory.getItems().addAll(categoryListForComboBox);
+                comboBoxCategory.setValue(null);
+                comboBoxForTerm.setValue(null);
+                textAreaForDefinition.clear();
+                buttonForFlashCard.setText("");
+                labelForNumberOfWord.setText("");
+                labelForError.setTextFill(Color.STEELBLUE);
+                labelForError.setText("Load progress is successful!");
+
+            }
+            else{
+                labelForError.setTextFill(Color.RED);
+                labelForError.setText("Load progress is failed!");
+            }
+
+        }
+        else{
+            labelForError.setTextFill(Color.RED);
+            labelForError.setText("Load progress is interrupted!");
+        }
 
 
     }
@@ -224,7 +255,7 @@ public class MainController {
         }
         else{
             labelForError.setTextFill(Color.RED);
-            labelForError.setText("Please select a valid category!");
+            labelForError.setText("Please press Test button!");
         }
 
     }
@@ -243,7 +274,7 @@ public class MainController {
         }
         else{
             labelForError.setTextFill(Color.RED);
-            labelForError.setText("Please select a valid category!");
+            labelForError.setText("Please press Test button!");
         }
     }
 
@@ -256,7 +287,22 @@ public class MainController {
         fileChooser.setInitialDirectory(new File("."));
         fileChooser.setInitialFileName("flashCardJava.txt");
         File file = fileChooser.showSaveDialog(new Stage());
-        String status = Data.saveFile(file);
+        if (file != null) {
+            String status = Data.saveFile(categories, file);
+            if (status.equals("error")) {
+                labelForError.setTextFill(Color.RED);
+                labelForError.setText("Save progress is failed!");
+            }
+            else{
+                labelForError.setTextFill(Color.STEELBLUE);
+                labelForError.setText("Save progress is successful!");
+            }
+        }
+        else{
+            labelForError.setTextFill(Color.RED);
+            labelForError.setText("Save progress is interrupted!");
+        }
+
 
 
 
