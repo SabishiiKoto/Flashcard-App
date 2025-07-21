@@ -50,6 +50,7 @@
             <items>
                   <MenuItem mnemonicParsing="false" onAction="#loadTrigger" text="Load File" />
               <MenuItem mnemonicParsing="false" onAction="#saveTrigger" text="Save File" />
+                  <MenuItem mnemonicParsing="false" onAction="#exitTrigger" text="Exit" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">

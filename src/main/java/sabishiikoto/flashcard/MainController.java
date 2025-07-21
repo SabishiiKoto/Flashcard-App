@@ -1,5 +1,6 @@
 package sabishiikoto.flashcard;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -179,6 +180,11 @@ public class MainController {
                 labelForError.setText("The category: " + categoryName + " is removed!");
             }
         }
+    }
+
+    @FXML
+    void exitTrigger(ActionEvent event) {
+        Platform.exit();
     }
 
     @FXML
